@@ -80,8 +80,16 @@ const state = {
 
 window.TYPES = {};
 
-// Defer execution so slide definitions have a chance to set themselves up
-setTimeout(() => state.initialize(), 0);
+const loader = document.createElement('p');
+loader.innerText = 'Loading...';
+document.body.appendChild(loader);
+window.addEventListener('load', () => {
+  document.body.removeChild(loader);
+  // Defer execution so slide definitions have a chance to set themselves up
+  setTimeout(() => {
+    state.initialize();
+  }, 0);
+});
 
 const title = 'Improving the Procedural Modelling Workflow';
 
